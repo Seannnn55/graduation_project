@@ -21,13 +21,26 @@ Stepper myStepper2(stepsPerRevolution, in8Pin, in9Pin, in10Pin, in11Pin);
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  SettingDC();
 }
+
+
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-
   
+  int i=1;
+
+  do{
+  analogWrite(5,255);
+  delay(200);
+  analogWrite(5,0);
+  delay(200);
+  }while(i!=1);
+
+}
+
+void StepMotoerFunc() {
   myStepper.setSpeed(100); // 속도 설정 (값을 조절하여 속도를 변경할 수 있습니다.)
   myStepper.step(stepsPerRevolution);
   delay(500);
@@ -45,4 +58,19 @@ void loop() {
   myStepper2.setSpeed(50);
   myStepper2.step(-stepsPerRevolution);
   delay(500);
+}
+
+void SettingDC(){
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+}
+
+void DcMoterFunc()
+{
+  digitalWrite(5, HIGH);
+  digitalWrite(6, HIGH);
+  delay(2000);
+  digitalWrite(5,HIGH);
+  digitalWrite(6, LOW);
+  delay(2000);
 }
